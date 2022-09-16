@@ -1,0 +1,19 @@
+query User($username:String!) {
+  user(username:$username) {
+    _id
+    publication {
+      _id
+      posts {
+        _id
+        slug
+        title
+        dateAdded
+        brief
+      }
+    }
+    username
+    photo
+    blogHandle
+    publicationDomain
+  }
+}
