@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         content: Buffer.from(contentMarkdown).toString('base64'),
         message: `Backed up on ${now.format('DD/MM/YYYY')}`,
         owner: process.env.GITHUB_USERNAME!,
-        path: `backups/${now.format('DD/MM/YYYY')}/${_id}.md`,
+        path: `backups/${now.format('YYYY/MMM/DD')}/${_id}.md`,
         repo: repositoryName.split('/').slice(1).join(''),
         committer: {
           email: process.env.GITHUB_COMMITTER_EMAIL!,
