@@ -11,27 +11,27 @@ export type RepositoriesDropdownProps = {
 const RepositoriesDropdown: React.FC<RepositoriesDropdownProps> = ({ userRepositories, username }) => {
   const [selection, setSelection] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  
+
   const handleSelection = (selection: GithubRepo) => {
     console.log(selection);
     setSelection(selection.nameWithOwner);
-  }
+  };
 
   const handleBackupRequest = async () => {
     setLoading(true);
     // console.log(process.env.NEXT_PUBLIC_TARGET_API_ENDPOINT);
-    await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL!}/api/backup`,
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          repositoryName: selection,
-          username,
-        }),
-      }
-    )
+    const baseURL = process.env.NEXT_PUBLIC_VERCEL_URL
+      ? process.env.NEXT_PUBLIC_VERCEL_URL
+      : process.env.NEXT_PUBLIC_BASE_URL;
+    await fetch(`${baseURL}/api/backup`, {
+      method: 'POST',
+      body: JSON.stringify({
+        repositoryName: selection,
+        username,
+      }),
+    });
     setLoading(false);
-  }
+  };
 
   return (
     <section className='flex justify-center pt-5'>
