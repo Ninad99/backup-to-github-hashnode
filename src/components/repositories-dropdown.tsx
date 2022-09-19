@@ -20,9 +20,9 @@ const RepositoriesDropdown: React.FC<RepositoriesDropdownProps> = ({ userReposit
   const handleBackupRequest = async () => {
     setLoading(true);
     // console.log(process.env.NEXT_PUBLIC_TARGET_API_ENDPOINT);
-    const baseURL = process.env.NEXT_PUBLIC_VERCEL_URL
-      ? process.env.NEXT_PUBLIC_VERCEL_URL
-      : process.env.NEXT_PUBLIC_BASE_URL;
+    const baseURL = process.env.NEXT_PUBLIC_BASE_URL
+      ? process.env.NEXT_PUBLIC_BASE_URL
+      : process.env.NEXT_PUBLIC_VERCEL_URL;
     await fetch(`${baseURL}/api/backup`, {
       method: 'POST',
       body: JSON.stringify({
