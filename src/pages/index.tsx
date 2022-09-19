@@ -70,7 +70,7 @@ export async function getServerSideProps(ctx: NextPageContext) {
 
   return {
     props: {
-      userRepositories: response.repositoryOwner.repositories.nodes,
+      userRepositories: response.repositoryOwner.repositories.nodes.filter(repo => repo.name.includes('articles-backup')),
       username,
     },
   };
