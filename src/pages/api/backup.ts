@@ -4,7 +4,9 @@ import { Message } from '../../types/message';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const queueId = process.env.SERVERLESSQ_ID!;
-  const target = process.env.NEXT_PUBLIC_TARGET_API_ENDPOINT!;
+  const target = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/consumer`
+    : process.env.NEXT_PUBLIC_TARGET_API_ENDPOINT!;
   const method = 'POST';
   const body = JSON.parse(req.body) as Message;
 
@@ -30,6 +32,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(result);
     return res.status(201).json(result);
   } catch (err) {
-    return res.status(500).json({ error: err })
+    return res.status(500).json({ error: err });
   }
 }
